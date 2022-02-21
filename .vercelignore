@@ -1,8 +1,0 @@
-# Ignore everything (folders and files) on root only
-/*
-!assets
-!app.py
-!functions.py
-!config.py
-!requirements.txt
-!vercel.json
