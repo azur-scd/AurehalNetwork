@@ -22,9 +22,8 @@ import config
 port = config.PORT
 host = config.HOST
 url_subpath = config.URL_SUBPATH
+
 # logs section
-
-
 class DashLoggerHandler(logging.StreamHandler):
     def __init__(self):
         logging.StreamHandler.__init__(self)
