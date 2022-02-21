@@ -40,7 +40,7 @@ dashLoggerHandler = DashLoggerHandler()
 logger.addHandler(dashLoggerHandler)
 
 # Setup the app
-external_stylesheets=[dbc.themes.FLATLY,"https://cdn3.devexpress.com/jslib/21.2.5/css/dx.common.css","https://cdn3.devexpress.com/jslib/21.2.5/css/dx.material.blue.dark.compact.css"]
+external_stylesheets=[dbc.themes.ZEPHYR]
 app = dash.Dash(
     __name__, meta_tags=[
         {"name": "viewport", "content": "width=device-width"}],
@@ -68,7 +68,7 @@ button_github = dbc.Button(
     "View Code on github",
     outline=True,
     color="primary",
-    href="https://github.com/plotly/dash-sample-apps/tree/master/apps/dash-image-segmentation",
+    href="https://github.com/azur-scd/AurehalNetwork",
     id="gh-link",
     style={"text-transform": "none"},
 )
@@ -352,15 +352,15 @@ app.layout = dbc.Container(
         html.Hr(),
          dbc.Row(
             [
-                dbc.Col([html.Div(['Made with', html.Img(
-                    src="https://images.plot.ly/logo/new-branding/plotly-logomark.png", height="30px")])], width=4),
+                dbc.Col([html.Div(['Made with ', html.Img(
+                    src="https://images.plot.ly/logo/new-branding/plotly-logomark.png", height="20px")])], width=4),
             ],
             justify="center",
         ),
         dbc.Row(
             [
                 dbc.Col(
-                    html.A('Contact : Géraldine Geoffroy', href='mailto:geraldine.geoffroy@univ-cotedazur.fr'), width=4),
+                    html.A('Contact : Géraldine Geoffroy', href='mailto:geraldine.geoffroy@univ-cotedazur.fr'), width=4),               
             ],
             justify="center",
         ),      
@@ -464,4 +464,4 @@ def info_nodata(network):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, port=port, host=host)
+    app.run_server(port=port, host=host)
