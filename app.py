@@ -69,6 +69,7 @@ button_github = dbc.Button(
     outline=True,
     color="primary",
     href="https://github.com/azur-scd/AurehalNetwork",
+    targer="_blanck",
     id="gh-link",
     style={"text-transform": "none"},
 )
@@ -360,7 +361,11 @@ app.layout = dbc.Container(
         dbc.Row(
             [
                 dbc.Col(
-                    html.A('Contact : Géraldine Geoffroy', href='mailto:geraldine.geoffroy@univ-cotedazur.fr'), width=4),               
+                       html.Div([
+                           html.Div('Contact : '),
+                           html.A('Géraldine Geoffroy', href='mailto:geraldine.geoffroy@univ-cotedazur.fr')
+                       ])
+                     , width=4),               
             ],
             justify="center",
         ),      
