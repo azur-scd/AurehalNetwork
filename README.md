@@ -4,6 +4,8 @@
 
 Application de visualisation des arborescences de structures dans Aurehal.
 
+Démo : [https://azurscd-aurehal-network.onrender.com/](https://azurscd-aurehal-network.onrender.com/)
+
 ![aurehal-network](/assets/screenshot_uca.png)
 
 Sur la base du docid d'une structure dans Aurehal, l'application remonte toutes les structures parentes ou récupère récursivement toutes les structures enfants de la structure courante et affiche la hiérarchie complète sous forme de graphe.
