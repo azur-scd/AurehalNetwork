@@ -69,7 +69,7 @@ button_github = dbc.Button(
     outline=True,
     color="primary",
     href="https://github.com/azur-scd/AurehalNetwork",
-    targer="_blanck",
+    target="_blanck",
     id="gh-link",
     style={"text-transform": "none"},
 )
