@@ -4,7 +4,7 @@
 
 Application de visualisation des arborescences de structures dans Aurehal.
 
-![aurehal-network](screenshot.png)
+![aurehal-network](/assets/screenshot_uca.png)
 
 Sur la base du docid d'une structure dans Aurehal, l'application remonte toutes les structures parentes ou récupère récursivement toutes les structures enfants de la structure courante et affiche la hiérarchie complète sous forme de graphe.
 
@@ -38,9 +38,24 @@ https://api.archives-ouvertes.fr/search/?wt=json&q=authStructId_i:1039632&rows=1
 
 ### Installation avec Docker
 
+1. Avec l'image pré-buildée
+
+Une image de ce repo est disponible sur le registre public Docker ici : [https://hub.docker.com/repository/docker/azurscd/aurehal-network-public](https://hub.docker.com/repository/docker/azurscd/aurehal-network-public)
+
+Pour l'installer et lancer le container : 
+
 ```
-docker build -ti aurehalnetwork:latest .
-docker run --name aurehal-network -d -p 8050:8050 aurehalnetwork:latest
+docker run --name YOUR_CONTAINER_NAME -d -p 8050:8050 azurscd/aurehal-network-public:latest
+
+```
+
+2. Builder votre propre image
+
+Vous pouvez également builder votre propre image avec le Dockerfile à la racine du repo.
+
+```
+docker build -t YOUR_IMAGE_NAME:TAG .
+docker run --name YOUR_CONTAINER_NAME -d -p 8050:8050 YOUR_IMAGE_NAME:TAG
 ```
 Lancer http://localhost:8050
 

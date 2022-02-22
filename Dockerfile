@@ -7,5 +7,5 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . .
 EXPOSE 8050
-CMD ["gunicorn", "--bind=0.0.0.0:8050", "app:server"]
+CMD ["gunicorn", "--bind=0.0.0.0:8050", "--timeout=0", "app:server"]
 #CMD ["python", "app.py"]
