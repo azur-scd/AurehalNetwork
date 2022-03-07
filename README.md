@@ -1,6 +1,6 @@
 # AurehalNetwork
 
-![forthebadge](./made-with-python-dash.svg)
+![forthebadge](/assets/forthebadge.svg)
 
 Application de visualisation des arborescences de structures dans Aurehal.
 
@@ -42,12 +42,12 @@ https://api.archives-ouvertes.fr/search/?wt=json&q=authStructId_i:1039632&rows=1
 
 1. Avec l'image pré-buildée
 
-Une image de ce repo est disponible sur le registre public Docker ici : [https://hub.docker.com/repository/docker/azurscd/aurehal-network-public](https://hub.docker.com/repository/docker/azurscd/aurehal-network-public)
+Une image de ce repo est disponible sur le registre public Docker ici : [https://hub.docker.com/repository/docker/azurscd/aurehal-network-public](https://hub.docker.com/repository/docker/azurscd/aurehal-network)
 
 Pour l'installer et lancer le container : 
 
 ```
-docker run --name YOUR_CONTAINER_NAME -d -p 8050:8050 azurscd/aurehal-network-public:latest
+docker run --name YOUR_CONTAINER_NAME -d -p 8050:8050 azurscd/aurehal-network:latest
 
 ```
 
