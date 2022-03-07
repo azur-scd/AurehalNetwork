@@ -42,7 +42,7 @@ https://api.archives-ouvertes.fr/search/?wt=json&q=authStructId_i:1039632&rows=1
 
 1. Avec l'image pré-buildée
 
-Une image de ce repo est disponible sur le registre public Docker ici : [https://hub.docker.com/repository/docker/azurscd/aurehal-network-public](https://hub.docker.com/repository/docker/azurscd/aurehal-network)
+Une image de ce repo est disponible sur le registre public Docker ici : [https://hub.docker.com/repository/docker/azurscd/aurehal-network](https://hub.docker.com/repository/docker/azurscd/aurehal-network)
 
 Pour l'installer et lancer le container : 
 
