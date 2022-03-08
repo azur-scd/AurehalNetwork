@@ -7,6 +7,7 @@ from dash import dcc
 from dash import html
 from dash import dash_table as dt
 import dash_bootstrap_components as dbc
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # -----MAIN FUNCTIONS-------
 
@@ -117,6 +118,11 @@ def get_child_struct(id, result=None):
     output = [i for n, i in enumerate(result) if i not in result[n + 1:]]
     return output
 
+def dict_populate(node,id=None,result=None):
+    result.append({"from": node, 'to': id})
+    return result
+
+
 
 def get_parent_struct(id, result=None):
     """
@@ -140,7 +146,7 @@ def get_parent_struct(id, result=None):
     """
     if result is None:  # create a new result if no intermediate was given
         result = []
-    url = 'https://api.archives-ouvertes.fr/ref/structure/?wt=json&q=docid:"{}"&fl=parentDocid_i'.format(
+    url = 'https://api.archives-ouvertes.fr/ref/structure/?wt=json&rows=50&q=docid:"{}"&fl=parentDocid_i'.format(
         id)
     print(url)
     resp = requests.get(url).text
@@ -207,8 +213,16 @@ def get_list_struct_infos(docid_list):
     * get_list_struct_infos(docid_list)
     * assign to a new dataframe : df = get_list_struct_infos(docid_list)
     """
-    results = pd.DataFrame()
-    for i in docid_list:
-        df = pd.DataFrame(get_struct_infos(i), index=[i])
-        results = pd.concat([results, df], axis=0).reset_index(drop=True)
+    processes = []
+    df_collection = []
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        processes = {executor.submit(get_struct_infos, i): i for i in docid_list}
+    for task in as_completed(processes):
+        worker_result = task.result()
+        df_collection.append(worker_result)
+    results =  pd.DataFrame(df_collection)
+    #results = pd.DataFrame()
+    #for i in docid_list:
+    #    df = pd.DataFrame(get_struct_infos(i), index=[i])
+    #    results = pd.concat([results, df], axis=0).reset_index(drop=True)
     return results

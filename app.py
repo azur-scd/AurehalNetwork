@@ -251,11 +251,11 @@ network_legend_type_s = html.Span(
     ]
 )
 # CONSOLE COMPONENT
-console = html.Div([
-    #dcc.Interval(id='intervals', interval=1000, n_intervals=0),
+console = html.Div(children=[
+    #dcc.Interval(id='interval-component', interval=1000, n_intervals=0),
     html.H1(id='div-out'),
-    html.Iframe(id='console-out', srcDoc='',
-                style={'width': '100%', 'height': 400})
+    html.Iframe(id='console-out',srcDoc='',
+                style={'width':'100%', 'height':400, 'color':'white'})
 ])
 # ALERT BAR (IF NO DATA) COMPONENT
 alert_bar = html.Div([html.P(),dbc.Alert("Pas de données trouvées !", color="danger"),],id="alert-bar",style={'display': 'none'})
@@ -470,4 +470,4 @@ def info_nodata(network):
 
 
 if __name__ == "__main__":
-    app.run_server(port=port, host=host)
+    app.run_server(debug=True,port=port, host=host)
