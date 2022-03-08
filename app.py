@@ -321,7 +321,7 @@ app.layout = dbc.Container(
                                         className="g-3"),
                                     dbc.Row([html.P("Attention patience : selon la requête le temps de moissonnage des réponses de l'API peut être plus ou moins long")]),
                                 ],
-                                    style={"backgroundColor": "#4d96ad"}),
+                                    style={"backgroundColor": "rgb(153, 217, 238)"}),
                                 dbc.CardBody(
                                     children=[
                                         dbc.Spinner(html.Div(id="loading",
