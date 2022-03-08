@@ -93,7 +93,7 @@ input_struct_id = html.Div(
     [
         html.H5(dbc.Label("Entrer un identifiant Aurehal de structure")),
         dbc.Input(id="docid", type="text"),
-        dbc.FormText("exemple : 302940"),
+        dbc.FormText("Exemples : 409 (rapide), 302940 (moyennement long), 1039632 (long)"),
     ]
 )
 # component harvest direction : parent or child strcutures
