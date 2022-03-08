@@ -93,7 +93,7 @@ input_struct_id = html.Div(
     [
         html.H5(dbc.Label("Entrer un identifiant Aurehal de structure")),
         dbc.Input(id="docid", type="text"),
-        dbc.FormText("exemple : 1039632"),
+        dbc.FormText("exemple : 302940"),
     ]
 )
 # component harvest direction : parent or child strcutures
@@ -316,9 +316,10 @@ app.layout = dbc.Container(
                                                     "Valider", id="submit-button", color="primary", className="me-1", n_clicks_timestamp='0')
                                             ],
                                             align="center",
-                                            md=2)
+                                            md=2),
                                     ],
-                                        className="g-3")
+                                        className="g-3"),
+                                    dbc.Row([html.P("Attention patience : selon la requête le temps de moissonnage des réponses de l'API peut être plus ou moins long")]),
                                 ],
                                     style={"backgroundColor": "#4d96ad"}),
                                 dbc.CardBody(
