@@ -93,7 +93,6 @@ input_struct_id = html.Div(
     [
         html.H5(dbc.Label("Entrer un identifiant Aurehal de structure")),
         dbc.Input(id="docid", type="text"),
-        dbc.FormText("Exemples : 409 (rapide), 302940 (moyennement long), 1039632 (long)"),
     ]
 )
 # component harvest direction : parent or child strcutures
@@ -319,7 +318,11 @@ app.layout = dbc.Container(
                                             md=2),
                                     ],
                                         className="g-3"),
-                                    dbc.Row([html.P("Attention patience : selon la requête le temps de moissonnage des réponses de l'API peut être plus ou moins long")]),
+                                    dbc.Row([dbc.FormText("Attention (et patience) : selon la requête le temps de moissonnage des réponses de l'API peut être plus ou moins long. Exemples : "),
+                                             dbc.FormText("docid 409 (researchteam) : 3 secondes"),
+                                             dbc.FormText("docid 302940 (regrouplaboratory) : 45 secondes"),    
+                                             dbc.FormText("docid 1039632 (institution) : 2 minutes"), 
+                                                   ]),
                                 ],
                                     style={"backgroundColor": "rgb(153, 217, 238)"}),
                                 dbc.CardBody(
