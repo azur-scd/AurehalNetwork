@@ -165,7 +165,7 @@ def get_struct_infos(id):
     """
     Function to get descriptive HAL metadata of a given structure.
     Metadata are coming from a request on the docid field to the ref/structure HAL API (&q=docid:)
-    The choosen metadata for output are : acronym_s,label_s,valid_s,type_s,address_s,url_s
+    The choosen metadata for output are : acronym_s,label_s,valid_s,type_s,idref_s,address_s,url_s
 
     Args
     ----------
@@ -182,7 +182,7 @@ def get_struct_infos(id):
     * used in the get_list_struct_infos function
     """
     result = {}
-    url = 'https://api.archives-ouvertes.fr/ref/structure/?wt=json&q=docid:{}&fl=acronym_s,label_s,valid_s,type_s,address_s,url_s'.format(
+    url = 'https://api.archives-ouvertes.fr/ref/structure/?wt=json&q=docid:{}&fl=acronym_s,label_s,valid_s,type_s,idref_s,address_s,url_s'.format(
         id)
     print(url)
     resp = requests.get(url).text
@@ -190,8 +190,19 @@ def get_struct_infos(id):
     result["id"] = id
     result["nb_publis"] = get_nb_pub_by_struct(id)
     for item in data:
-        for key, value in item.items():
-            result[key] = value
+        if 'idref_s' in item.keys():
+            for key, value in item.items():
+                if key == "idref_s":
+                    result[key] = value[0]     
+                else:              
+                    result[key] = value
+                result["no_dot"] = "image"
+                result["dot"] = "dot"             
+        else:
+            for key, value in item.items():
+                result[key] = value
+                result["no_dot"] = "dot"
+                result["dot"] = "dot"  
     return result
 
 

@@ -169,6 +169,20 @@ radio_nodes_size = html.Div(
         ),
     ]
 )
+# component display nodes idref
+radio_nodes_form = html.Div(
+    [
+        html.H5(dbc.Label("Déterminer la forme des noeuds en fonction de la présence (ou non) de ppn Idref")),
+        dbc.RadioItems(
+            options=[
+                {"label": "non","value": "dot"},
+                {"label": "oui", "value": "no_dot"},
+            ],
+            value="dot",
+            id="radio-nodes-form",
+        ),
+    ]
+)
 # FILTERS COMPONENTS
 # component filter node title (label_s param)
 input_filter_node_title = html.Div(
@@ -220,6 +234,8 @@ controls_layout = html.Div(
         radio_nodes_color,
         html.Hr(),
         radio_nodes_size,
+        html.Hr(),
+        radio_nodes_form
     ]
 )
 controls_filtres = html.Div(
@@ -314,10 +330,9 @@ app.layout = dbc.Container(
                                                 dbc.Button(
                                                     "Valider", id="submit-button", color="primary", className="me-1", n_clicks_timestamp='0')
                                             ],
-                                            align="center",
+                                            align="end",
                                             md=2),
-                                    ],
-                                        className="g-3"),
+                                    ]),
                                     dbc.Row([dbc.FormText("Attention (et patience) : selon la requête le temps de moissonnage des réponses de l'API peut être plus ou moins long. Exemples : "),
                                              dbc.FormText("docid 409 (researchteam) : 3 secondes"),
                                              dbc.FormText("docid 302940 (regrouplaboratory) : 45 secondes"),    
@@ -395,7 +410,6 @@ def filter_condition(input_filter_node_title,checklist_valid_s_colors, checklist
                     node["type_s"] in checklist_type_s_colors) & (str(input_filter_node_title) in title)
     return condition
 
-
 # CALLBACKS
 @app.callback(Output('edge-dict', 'data'),
               Output('node-dict', 'data'),
@@ -426,6 +440,7 @@ def update_states(docid, select_harvest_direction, n_clicks):
 @app.callback(Output('network', 'children'),
               [Input("radio-nodes-color", "value"),
               Input("radio-nodes-size", "value"),
+              Input("radio-nodes-form", "value"),
               Input("checklist-valid-s-colors", "value"),
               Input("checklist-type-s-colors", "value"),
               Input("radio-hierarchical-enabled", "value"),
@@ -435,7 +450,7 @@ def update_states(docid, select_harvest_direction, n_clicks):
               Input("node-dict", "data")],
               prevent_initial_call=True
               )
-def render_network(radio_nodes_color, radio_nodes_size, checklist_valid_s_colors, checklist_type_s_colors, radio_hierarchical_enabled, select_hierarchical_direction, input_filter_node_title, edge_dict, node_dict):
+def render_network(radio_nodes_color, radio_nodes_size, radio_nodes_form,checklist_valid_s_colors, checklist_type_s_colors, radio_hierarchical_enabled, select_hierarchical_direction, input_filter_node_title, edge_dict, node_dict):
     edges = []
     nodes = []
     if (node_dict is not None) & (edge_dict is not None):
@@ -447,8 +462,9 @@ def render_network(radio_nodes_color, radio_nodes_size, checklist_valid_s_colors
             #node title for tooltip
             title = '{} (id:{}) ({} publis) ({})'.format(node['label_s'], node['id'],node['nb_publis'],node['valid_s'])
             if filter_condition(input_filter_node_title,checklist_valid_s_colors, checklist_type_s_colors,node,title):
-                nodes.append({**node, **{'label': node['acronym_s'], 'shape': 'dot',
-                             'size': update_node_size(radio_nodes_size,node), 'title': title, 'color': COLORS[node[radio_nodes_color]]}})
+                print(node[radio_nodes_form])
+                nodes.append({**node, **{'label': node['acronym_s'], 'shape': node[radio_nodes_form], 'image':app.get_asset_url('idref_logo.png'),
+                    'size': update_node_size(radio_nodes_size,node), 'title': title, 'color': COLORS[node[radio_nodes_color]]}})
         graphdata = {'nodes': nodes, 'edges': edges}
         return visdcc.Network(id='graph', data=graphdata, options=OPTIONS)
     else:
