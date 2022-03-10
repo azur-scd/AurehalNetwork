@@ -7,5 +7,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . .
 EXPOSE 8050
-CMD ["gunicorn", "--workers=5", "--threads=2", "--bind=0.0.0.0:8050", "--timeout=0", "app:server"]
-#CMD ["python", "app.py"]
+CMD gunicorn --workers 5 --threads 2 -b 0.0.0.0:8050 --timeout 0 app:server
