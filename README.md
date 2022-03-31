@@ -4,7 +4,7 @@
 
 Application de visualisation des arborescences de structures dans Aurehal.
 
-Démo : [https://azurscd-aurehal-network.onrender.com/](https://azurscd-aurehal-network.onrender.com/)
+Démo : [http://azur-scd.com/apps/aurehal-network](http://azur-scd.com/apps/aurehal-network)
 
 ![aurehal-network](/assets/screenshot_uca.png)
 
