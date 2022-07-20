@@ -59,7 +59,7 @@ Vous pouvez également builder votre propre image avec le Dockerfile à la racin
 docker build -t YOUR_IMAGE_NAME:TAG .
 docker run --name YOUR_CONTAINER_NAME -d -p 8050:8050 YOUR_IMAGE_NAME:TAG
 ```
-Lancer http://localhost:8050
+Lancer http://localhost:8050/aurehal-network/
 
 ## Installation avec Python Dash
 
@@ -85,7 +85,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Ouvrir http://localhost:8050
+Ouvrir http://localhost:8050/aurehal-network/
 
 
 

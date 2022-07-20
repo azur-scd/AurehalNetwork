@@ -21,7 +21,7 @@ import config
 # config variables
 port = config.PORT
 host = config.HOST
-#url_subpath = config.URL_SUBPATH
+url_subpath = config.URL_SUBPATH
 
 # logs section
 class DashLoggerHandler(logging.StreamHandler):
@@ -45,7 +45,7 @@ app = dash.Dash(
     __name__, meta_tags=[
         {"name": "viewport", "content": "width=device-width"}],
     external_stylesheets=external_stylesheets,
-    #url_base_pathname=url_subpath
+    url_base_pathname=url_subpath
 )
 
 app.title = "AurehalNetwork"
