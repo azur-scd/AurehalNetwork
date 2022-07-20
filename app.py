@@ -267,11 +267,11 @@ network_legend_type_s = html.Span(
 )
 # CONSOLE COMPONENT
 console = html.Div(children=[
-    #dcc.Interval(id='interval-component', interval=1000, n_intervals=0),
+    dcc.Interval(id='interval-component', interval=1000, n_intervals=0),
     html.H1(id='div-out'),
-    html.Iframe(id='console-out',srcDoc='',
-                style={'width':'100%', 'height':400, 'color':'white'})
+    html.Iframe(id='console-out',srcDoc='',style={'width':'100%', 'height':300})
 ])
+
 # ALERT BAR (IF NO DATA) COMPONENT
 alert_bar = html.Div([html.P(),dbc.Alert("Pas de données trouvées !", color="danger"),],id="alert-bar",style={'display': 'none'})
 # LAYOUTS
@@ -295,23 +295,7 @@ app.layout = dbc.Container(
                             [dbc.CardHeader(html.H4("Filtres")),
                              dbc.CardBody(controls_filtres), ],
                             color="warning", outline=True
-                        ),
-                        html.P(""),
-                        dbc.Card(
-                            [dbc.CardHeader(children=[
-                                dbc.Row(
-                                            [
-                                                dbc.Col(
-                                                    [html.H4("Console")], md=4),
-                                                dbc.Col([dbc.Button(
-                                                    "Voir les logs des appels à l'API HAL", id="console-button", size="sm", n_clicks=0)], md=8)
-                                            ],
-                                            ),
-                            ]
-                            ),
-                                dbc.CardBody(console), ],
-                            color="dark", inverse=True
-                        ),
+                        ),               
                     ],
                 ),
                 dbc.Col(
@@ -350,7 +334,8 @@ app.layout = dbc.Container(
                                         network_legend_valid_s,
                                         network_legend_type_s,
                                         alert_bar,
-                                        html.Div(id="network")],
+                                        html.Div(id="network")
+                                        ],
                                     style={"height": "80vh"},
                                 )
                             ],
@@ -361,13 +346,31 @@ app.layout = dbc.Container(
                             [
                                 dbc.CardHeader("Tableau des structures"),
                                 dbc.CardBody(children=[html.Div(id="node-table")],
-                                             style={"height": "100%"}),
+                                             style={"height": "50%"}),
                             ],
                             color="success", outline=True,
                         ),
                     ]
                 ),
             ],
+        ),
+        html.P(""),
+        dbc.Row(
+               dbc.Col( dbc.Card(
+                            [dbc.CardHeader(children=[
+                                dbc.Row(
+                                            [
+                                                dbc.Col(
+                                                    [html.H4("Console (logs des appels à l'API HAL)")], md=12),
+                                                #dbc.Col([dbc.Button("Voir les logs des appels à l'API HAL", id="console-button", size="sm", n_clicks=0)], md=8)
+                                            ],
+                                            ),
+                            ]
+                            ),
+                                dbc.CardBody(console), ],
+                            #color="dark", inverse=True
+                        ),
+                        width=12)
         ),
         html.Hr(),
          dbc.Row(
@@ -472,10 +475,12 @@ def render_network(radio_nodes_color, radio_nodes_size, radio_nodes_form,checkli
 
 @app.callback(
     Output('console-out', 'srcDoc'),
-    [Input('console-button', 'n_clicks')])
-def update_output(n_clicks):
-    if n_clicks != 0:
-        return ('\n'.join(dashLoggerHandler.queue)).replace('\n', '<BR>')
+    Input('interval-component', 'n_intervals')
+    #[Input('console-button', 'n_clicks')]
+    )
+def update_output(n):
+    #if n_clicks != 0:
+    return ('\n'.join(dashLoggerHandler.queue)).replace('\n', '<BR>')
 
 @app.callback(
     Output('alert-bar', 'style'),

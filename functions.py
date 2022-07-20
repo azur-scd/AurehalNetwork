@@ -107,7 +107,7 @@ def get_child_struct(id, result=None):
         id)
     print(url)
     resp = requests.get(url).text
-    if (json.loads(resp)['response']['docs']) and (len(json.loads(resp)['response']['docs']) != 0):
+    if len(json.loads(resp)['response']['docs']) != 0:
         data = json.loads(resp)['response']['docs']
         for node in data:
             result.append({"from": id, 'to': node['docid']})
@@ -181,7 +181,6 @@ def get_struct_infos(id):
     * get_struct_infos(id)
     * used in the get_list_struct_infos function
     """
-    print(id)
     result = {}
     url = 'https://api.archives-ouvertes.fr/ref/structure/?wt=json&q=docid:{}&fl=acronym_s,label_s,valid_s,type_s,idref_s,address_s,url_s'.format(
         id)
